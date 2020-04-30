@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.devMode" value="false"></constant>
+	<constant name="struts.ui.theme" value="simple"></constant>
+	
+	<package name="basePack" extends="struts-default" abstract="true">
+		<interceptors>
+			<interceptor name="loginInterceptor" class="cn.wyx.interceptor.LoginInterceptor"></interceptor>
+			<interceptor-stack name="jjStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="loginInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="jjStack"></default-interceptor-ref>
+	</package>
+	
+	
+	<package name="jiajiao" extends="basePack">
+	
+		<!--jsps层页面跳转专用  -->
+		<action name="JJ_*">
+			<result>/WEB-INF/jsps/{1}.jsp</result>
+			<result name="none">/WEB-INF/jsps/login.jsp</result>
+		</action>
+		
+		<!-- AdminAction专用转发器 -->
+		<action name="ajax_a_*" class="adminAction" method="ajax_a_{1}">
+			<interceptor-ref name="jjStack">
+				<param name="loginInterceptor.excludeMethods">ajax_a_login</param>
+			</interceptor-ref>
+			<result name="none" type="redirectAction">JJ_login</result>
+			<result name="main" type="redirectAction">JJ_login</result>
+			<result name="input">/WEB-INF/jsps/404.jsp</result>
+		</action>
+		
+		<!-- UsersAction专用转发器 -->
+		<action name="users_*" class="usersAction" method="users_{1}">
+			<result name="success">/WEB-INF/jsps/users/{1}.jsp</result>
+			<result name="none" type="redirectAction">JJ_login</result>
+			<result name="input">/WEB-INF/jsps/404.jsp</result>
+		</action>
+		
+		<!-- ParentAction专用转发器 -->
+		<action name="parent_*" class="parentAction" method="parent_{1}">
+			<result name="success">/WEB-INF/jsps/parent/{1}.jsp</result>
+			<result name="none" type="redirectAction">JJ_login</result>
+			<result name="input">/WEB-INF/jsps/404.jsp</result>
+		</action>
+		
+		<!-- PphotoAction专用转发器 -->
+		<action name="pphoto_*" class="pphotoAction" method="pphoto_{1}">
+			<result name="success">/WEB-INF/jsps/pphoto/{1}.jsp</result>
+			<result name="none" type="redirectAction">JJ_login</result>
+			<result name="input">/WEB-INF/jsps/404.jsp</result>
+		</action>
+		
+		<!-- PreleaseAction专用转发器 -->
+		<action name="prelease_*" class="preleaseAction" method="prelease_{1}">
+			<result name="success">/WEB-INF/jsps/prelease/{1}.jsp</result>
+			<result name="none" type="redirectAction">JJ_login</result>
+			<result name="input">/WEB-INF/jsps/404.jsp</result>
+		</action>
+		
+		<!-- TeacherAction专用转发器 -->
+		<action name="teacher_*" class="teacherAction" method="teacher_{1}">
+			<result name="success">/WEB-INF/jsps/teacher/{1}.jsp</result>
+			<result name="none" type="redirectAction">JJ_login</result>
+			<result name="input">/WEB-INF/jsps/404.jsp</result>
+		</action>
+		
+		<!-- SignupAction专用转发器 -->
+		<action name="signup_*" class="signupAction" method="signup_{1}">
+			<result name="success">/WEB-INF/jsps/signup/{1}.jsp</result>
+			<result name="none" type="redirectAction">JJ_login</result>
+			<result name="input">/WEB-INF/jsps/404.jsp</result>
+		</action>
+		
+		<!-- MechanismAction专用转发器 -->
+		<action name="mechanism_*" class="mechanismAction" method="mechanism_{1}">
+			<result name="success">/WEB-INF/jsps/mechanism/{1}.jsp</result>
+			<result name="none" type="redirectAction">JJ_login</result>
+			<result name="input">/WEB-INF/jsps/404.jsp</result>
+		</action>
+		
+		<!-- MreleaseAction专用转发器 -->
+		<action name="mrelease_*" class="mreleaseAction" method="mrelease_{1}">
+			<result name="success">/WEB-INF/jsps/mrelease/{1}.jsp</result>
+			<result name="none" type="redirectAction">JJ_login</result>
+			<result name="input">/WEB-INF/jsps/404.jsp</result>
+		</action>
+		
+		<!-- TphotoAction专用转发器 -->
+		<action name="tphoto_*" class="tphotoAction" method="tphoto_{1}">
+			<result name="success">/WEB-INF/jsps/tphoto/{1}.jsp</result>
+			<result name="none" type="redirectAction">JJ_login</result>
+			<result name="input">/WEB-INF/jsps/404.jsp</result>
+		</action>
+		
+		<!-- TphotoAction专用转发器 -->
+		<action name="mphoto_*" class="mphotoAction" method="mphoto_{1}">
+			<result name="success">/WEB-INF/jsps/mphoto/{1}.jsp</result>
+			<result name="none" type="redirectAction">JJ_login</result>
+			<result name="input">/WEB-INF/jsps/404.jsp</result>
+		</action>
+		
+		<!-- SubjecttypeAction专用转发器 -->
+		<action name="subjecttype_*" class="subjecttypeAction" method="subjecttype_{1}">
+			<result name="success">/WEB-INF/jsps/subjecttype/{1}.jsp</result>
+			<result name="none" type="redirectAction">JJ_login</result>
+			<result name="input">/WEB-INF/jsps/404.jsp</result>
+		</action>
+		
+		<!-- TeachertypeAction专用转发器 -->
+		<action name="teachertype_*" class="teachertypeAction" method="teachertype_{1}">
+			<result name="success">/WEB-INF/jsps/teachertype/{1}.jsp</result>
+			<result name="none" type="redirectAction">JJ_login</result>
+			<result name="input">/WEB-INF/jsps/404.jsp</result>
+		</action>
+		
+		<!-- MechanismtypeAction专用转发器 -->
+		<action name="mechanismtype_*" class="mechanismtypeAction" method="mechanismtype_{1}">
+			<result name="success">/WEB-INF/jsps/mechanismtype/{1}.jsp</result>
+			<result name="none" type="redirectAction">JJ_login</result>
+			<result name="input">/WEB-INF/jsps/404.jsp</result>
+		</action>
+		
+			
+	</package>	
+</struts>
